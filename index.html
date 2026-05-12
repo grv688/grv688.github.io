@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0061)file:///C:/Users/steve/Downloads/dracula_daily_tracker_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dracula Daily — Progress Tracker</title>
 <style>
@@ -35,127 +35,141 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: var(--bg);
     color: var(--text);
-    padding: 2rem 1.5rem 4rem;
+    padding: 1.25rem 1rem 4rem;
     max-width: 820px;
     margin: 0 auto;
     font-size: 15px;
     line-height: 1.6;
   }
   h1 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 0.25rem;
     color: var(--text);
   }
   .subtitle {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text2);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
   .status-banner {
     background: var(--accent-light);
     border: 0.5px solid var(--accent);
     border-radius: var(--radius);
     padding: 0.75rem 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     font-size: 14px;
     color: var(--accent);
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    line-height: 1.5;
   }
   .status-banner strong { font-weight: 600; }
   .controls {
     display: flex;
     gap: 8px;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
     align-items: center;
   }
   input[type="text"] {
-    padding: 7px 12px;
+    padding: 8px 12px;
     border: 0.5px solid var(--border2);
     border-radius: 8px;
     background: var(--bg);
     color: var(--text);
-    font-size: 14px;
+    font-size: 15px;
     outline: none;
-    width: 240px;
+    flex: 1;
+    min-width: 0;
   }
   input[type="text"]:focus { border-color: var(--accent); }
   button {
-    padding: 7px 14px;
+    padding: 8px 14px;
     border: 0.5px solid var(--border2);
     border-radius: 8px;
     background: var(--bg);
     color: var(--text2);
     font-size: 13px;
     cursor: pointer;
+    white-space: nowrap;
   }
   button:hover { background: var(--bg2); }
   .legend {
     display: flex;
-    gap: 16px;
-    margin-bottom: 1.25rem;
-    font-size: 13px;
+    gap: 12px;
+    margin-bottom: 1rem;
+    font-size: 12px;
     color: var(--text2);
     flex-wrap: wrap;
+    row-gap: 6px;
   }
-  .legend-item { display: flex; align-items: center; gap: 6px; }
-  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
   .table-wrap {
     border: 0.5px solid var(--border);
     border-radius: var(--radius);
     overflow: hidden;
   }
-  table { width: 100%; border-collapse: collapse; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
   thead th {
     background: var(--bg2);
-    padding: 9px 14px;
+    padding: 8px 10px;
     text-align: left;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text2);
     border-bottom: 0.5px solid var(--border);
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
-  thead th:last-child { text-align: right; }
+  thead th.th-date  { width: 72px; }
+  thead th.th-desc  { width: auto; }
+  thead th.th-pct   { width: 62px; text-align: right; }
+  /* Hide bar column header on mobile */
+  thead th.th-bar   { width: 80px; }
   tbody tr { border-bottom: 0.5px solid var(--border); transition: background 0.1s; }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: var(--bg2); }
   tbody tr.today-row { background: var(--accent-light) !important; }
-  tbody tr.future-row { opacity: 0.45; }
+  tbody tr.future-row { opacity: 0.4; }
   tbody tr.month-hdr td {
     background: var(--bg3);
     font-size: 11px;
     font-weight: 600;
     color: var(--text2);
-    padding: 5px 14px;
+    padding: 5px 10px;
     border-bottom: 0.5px solid var(--border);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
-  td { padding: 8px 14px; vertical-align: middle; }
-  td.col-month { width: 60px; font-weight: 500; color: var(--text2); font-size: 13px; }
-  td.col-day { width: 44px; font-weight: 600; font-size: 14px; }
-  td.col-desc { font-size: 13px; color: var(--text2); }
-  td.col-pct { text-align: right; white-space: nowrap; }
+  td { padding: 8px 10px; vertical-align: middle; }
+  td.col-date {
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--text);
+  }
+  td.col-date span.mo {
+    font-weight: 400;
+    color: var(--text2);
+    margin-right: 3px;
+  }
+  td.col-desc { font-size: 13px; color: var(--text2); word-break: break-word; }
+  td.col-pct  { text-align: right; white-space: nowrap; }
+  td.col-bar  { }
   .today-tag {
     display: inline-block;
     background: var(--accent);
     color: #fff;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 600;
-    padding: 1px 6px;
+    padding: 1px 5px;
     border-radius: 10px;
-    margin-left: 6px;
+    margin-left: 4px;
     vertical-align: middle;
     letter-spacing: 0.02em;
   }
-  .pct-wrap { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
   .bar-bg {
-    width: 72px;
+    width: 100%;
     height: 5px;
     border-radius: 3px;
     background: var(--bg3);
@@ -164,11 +178,11 @@
   .bar-fill { height: 100%; border-radius: 3px; }
   .pct-label {
     display: inline-block;
-    padding: 2px 9px;
+    padding: 2px 7px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    min-width: 54px;
+    min-width: 48px;
     text-align: center;
   }
   .no-results {
@@ -183,6 +197,17 @@
     color: var(--text2);
     text-align: center;
   }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── Mobile: hide the bar column, merge month+day ── */
+  @media (max-width: 520px) {
+    body { padding: 1rem 0.75rem 4rem; }
+    h1 { font-size: 18px; }
+    thead th.th-bar, td.col-bar { display: none; }
+    thead th.th-pct { width: 70px; }
+    td.col-desc { font-size: 12px; }
+    .pct-label { font-size: 11px; min-width: 44px; padding: 2px 6px; }
+  }
 </style>
 </head>
 <body>
@@ -190,11 +215,11 @@
 <h1>🧛 Dracula Daily — Progress Tracker</h1>
 <p class="subtitle">Percentages are cumulative by word count through the full novel (~160,000 words), in Dracula Daily's chronological order.</p>
 
-<div class="status-banner" id="banner"></div>
+<div class="status-banner" id="banner">📬 Today is <strong>May 12</strong> — you have an email! You are <strong>11.5%</strong> through the novel.</div>
 
 <div class="controls">
-  <input type="text" id="search" placeholder="Filter by month, day, or keyword…" oninput="renderTable()" />
-  <button onclick="document.getElementById('search').value='';renderTable()">Clear</button>
+  <input type="text" id="search" placeholder="Filter by month, day, or keyword…" oninput="renderTable()">
+  <button onclick="document.getElementById(&#39;search&#39;).value=&#39;&#39;;renderTable()">Clear</button>
   <button onclick="scrollToToday()">Jump to today ↓</button>
 </div>
 
@@ -210,18 +235,458 @@
   <table>
     <thead>
       <tr>
-        <th>Month</th>
-        <th>Day</th>
-        <th>Notable content</th>
-        <th>% Done</th>
+        <th class="th-date">Date</th>
+        <th class="th-desc">Notable content</th>
+        <th class="th-bar">Progress</th>
+        <th class="th-pct">% Done</th>
       </tr>
     </thead>
-    <tbody id="tbody"></tbody>
+    <tbody id="tbody"><tr class="month-hdr"><td colspan="4">May</td></tr><tr>
+      <td class="col-date"><span class="mo">May</span>3</td>
+      <td class="col-desc">Jonathan arrives in Bistritz</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:1.5%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">1.5%</span></td></tr><tr>
+      <td class="col-date"><span class="mo">May</span>4</td>
+      <td class="col-desc">Jonathan's journal: St. George's Eve</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:2.8%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">2.8%</span></td></tr><tr>
+      <td class="col-date"><span class="mo">May</span>5</td>
+      <td class="col-desc">Jonathan arrives at Castle Dracula</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:5.2%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">5.2%</span></td></tr><tr>
+      <td class="col-date"><span class="mo">May</span>7</td>
+      <td class="col-desc">Jonathan's journal: morning after</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:7%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">7.0%</span></td></tr><tr>
+      <td class="col-date"><span class="mo">May</span>8</td>
+      <td class="col-desc">Jonathan discovers no reflection in the mirror</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:8.9%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">8.9%</span></td></tr><tr>
+      <td class="col-date"><span class="mo">May</span>9</td>
+      <td class="col-desc">Mina's first letter to Lucy</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:9.6%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">9.6%</span></td></tr><tr class="today-row" id="today-row">
+      <td class="col-date"><span class="mo">May</span>12<span class="today-tag">today</span></td>
+      <td class="col-desc">Jonathan's midnight history lesson with Dracula</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:11.5%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">11.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>15</td>
+      <td class="col-desc">Jonathan watches Count crawl down the castle wall</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:12.5%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">12.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>16</td>
+      <td class="col-desc">Jonathan encounters the three women</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:14.4%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">14.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>18</td>
+      <td class="col-desc">Jonathan investigates the locked room</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:14.9%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">14.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>19</td>
+      <td class="col-desc">Jonathan forced to write three post-dated letters</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:15.6%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">15.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>24</td>
+      <td class="col-desc">Lucy's letter: three proposals in one day!</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:16.9%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">16.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>25</td>
+      <td class="col-desc">Seward's diary begins; Quincey's letter to Arthur</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:17.8%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">17.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>26</td>
+      <td class="col-desc">Arthur's telegram</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:18%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">18.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>28</td>
+      <td class="col-desc">Jonathan tries to send letters via the Szgany</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:18.9%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">18.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">May</span>31</td>
+      <td class="col-desc">Jonathan's papers and clothes are stolen</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:19.6%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">19.6%</span></td></tr><tr class="month-hdr"><td colspan="4">June</td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jun</span>5</td>
+      <td class="col-desc">Seward diary: Renfield's fly obsession begins</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:20.4%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">20.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jun</span>17</td>
+      <td class="col-desc">Jonathan: the leiter-wagons arrive at the castle</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:21.2%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">21.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jun</span>18</td>
+      <td class="col-desc">Seward diary: Renfield graduates to spiders</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:21.7%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">21.7%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jun</span>24</td>
+      <td class="col-desc">Jonathan watches Count leave disguised in his clothes</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:22.6%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">22.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jun</span>25</td>
+      <td class="col-desc">Jonathan's daring escape attempt down the castle wall</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:23.5%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">23.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jun</span>29</td>
+      <td class="col-desc">Jonathan's final post-dated letter date</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:24.3%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">24.3%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jun</span>30</td>
+      <td class="col-desc">Jonathan's last diary entry — escape or die</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:25.2%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">25.2%</span></td></tr><tr class="month-hdr"><td colspan="4">July</td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jul</span>1</td>
+      <td class="col-desc">Seward diary: Renfield deliberately eats a blow-fly</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:25.8%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">25.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jul</span>8</td>
+      <td class="col-desc">Seward diary: 'there is method in his madness'</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:26.2%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">26.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jul</span>19</td>
+      <td class="col-desc">Seward diary: Renfield desperately wants a kitten</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:26.8%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">26.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jul</span>20</td>
+      <td class="col-desc">Seward diary: Renfield has eaten all his sparrows</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:27.3%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">27.3%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jul</span>24</td>
+      <td class="col-desc">Mina arrives at Whitby; meets old Mr. Swales</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:29.2%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">29.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jul</span>26</td>
+      <td class="col-desc">Mina's journal: growing anxiety for Jonathan</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:29.7%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">29.7%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Jul</span>27</td>
+      <td class="col-desc">Mina's journal: Lucy begins sleepwalking</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:30.3%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">30.3%</span></td></tr><tr class="month-hdr"><td colspan="4">August</td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>1</td>
+      <td class="col-desc">Mina: storm gathering; Seward: Renfield loses interest in pets</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:31.2%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">31.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>3</td>
+      <td class="col-desc">Mina's journal: still no news from Jonathan</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:31.8%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">31.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>6</td>
+      <td class="col-desc">Mina: Mr. Swales grows serious; storm signals everywhere</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:32.6%;background:#5DCAA5"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#E1F5EE;color:#0F6E56">32.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>8</td>
+      <td class="col-desc">The Demeter arrives! Dailygraph article + captain's log</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:36.8%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">36.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>9</td>
+      <td class="col-desc">Aftermath: the dog found dead; cargo shipped to Carfax</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:37.7%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">37.7%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>10</td>
+      <td class="col-desc">The captain's funeral; old Mr. Swales found dead</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:38.5%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">38.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>11</td>
+      <td class="col-desc">Mina finds Lucy asleep on the cliff at midnight</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:40%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">40.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>12</td>
+      <td class="col-desc">Lucy tries the locked door in her sleep</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:40.5%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">40.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>13</td>
+      <td class="col-desc">Lucy sits up in bed pointing at the window; a bat flits past</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:41%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">41.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>14</td>
+      <td class="col-desc">Lucy murmurs: 'His red eyes again'</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:41.6%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">41.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>15</td>
+      <td class="col-desc">Arthur's father improves; Lucy's wedding date set</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:42.1%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">42.1%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>17</td>
+      <td class="col-desc">Lucy visibly fading; the boxes shipped to Carfax</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:43.1%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">43.1%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>18</td>
+      <td class="col-desc">Lucy better; Mina writes from their churchyard seat</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:43.8%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">43.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>19</td>
+      <td class="col-desc">News of Jonathan at last! Seward: Renfield suddenly excited</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:45%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">45.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>20</td>
+      <td class="col-desc">Seward: Renfield grows strangely calm at moonrise</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:45.6%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">45.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>21</td>
+      <td class="col-desc">Carter &amp; Paterson confirm the boxes are delivered</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:45.9%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">45.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>23</td>
+      <td class="col-desc">Seward: Renfield won't escape; a bat flies west</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:46.3%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">46.3%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>24</td>
+      <td class="col-desc">Mina writes from Budapest; Lucy's own diary begins</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:47.5%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">47.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>25</td>
+      <td class="col-desc">Lucy's diary: scratching or flapping at the window</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:47.9%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">47.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>30</td>
+      <td class="col-desc">Lucy's letter to Mina: 'I am quite restored'</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:48.8%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">48.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Aug</span>31</td>
+      <td class="col-desc">Arthur's letter to Seward requesting he examine Lucy</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:49.5%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">49.5%</span></td></tr><tr class="month-hdr"><td colspan="4">September</td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>1</td>
+      <td class="col-desc">Arthur summoned to his ailing father; asks Seward to act</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:49.9%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">49.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>2</td>
+      <td class="col-desc">Seward's letter to Arthur; Van Helsing's reply — coming at once</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:51.2%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">51.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>3</td>
+      <td class="col-desc">Seward writes after Van Helsing's first examination of Lucy</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:52.2%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">52.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>4</td>
+      <td class="col-desc">Seward: Renfield's noon paroxysm; Van Helsing studies Lucy</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:53.1%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">53.1%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>5</td>
+      <td class="col-desc">Telegrams: Lucy much improved</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:53.4%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">53.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>6</td>
+      <td class="col-desc">Telegram: 'terrible change for the worse — come at once'</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:53.8%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">53.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>7</td>
+      <td class="col-desc">Van Helsing arrives at Liverpool St; the real work begins</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:55%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">55.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>8</td>
+      <td class="col-desc">First transfusion — Arthur gives his blood for Lucy</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:56.5%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">56.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>9</td>
+      <td class="col-desc">Lucy up and cheerful; Seward rests in the next room</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:57.9%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">57.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>10</td>
+      <td class="col-desc">Van Helsing finds Lucy ghostly white; second transfusion</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:59.5%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">59.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>11</td>
+      <td class="col-desc">Garlic arrives from Haarlem; Van Helsing's elaborate night ritual</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:60.3%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">60.3%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>12</td>
+      <td class="col-desc">Lucy's diary: 'I never liked garlic before tonight'</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:61%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">61.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>13</td>
+      <td class="col-desc">Mrs. Westenra removes the garlic; third transfusion needed</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:62.5%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">62.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>17</td>
+      <td class="col-desc">Lucy's diary: four days of peace — feeling herself again</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:63.4%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">63.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>18</td>
+      <td class="col-desc">Mrs. Westenra opens a window again; another crisis</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:64.6%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">64.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>19</td>
+      <td class="col-desc">Van Helsing gives his own blood; the fourth transfusion</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:65.6%;background:#EF9F27"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAEEDA;color:#854F0B">65.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>20</td>
+      <td class="col-desc">Seward diary: a wolf escapes from the Zoological Gardens</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:66.6%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">66.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>21</td>
+      <td class="col-desc">The wolf at Lucy's window; Mrs. Westenra dies of shock</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:67.4%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">67.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>22</td>
+      <td class="col-desc">Lucy's death — a long and harrowing night</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:69.4%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">69.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>23</td>
+      <td class="col-desc">The day after; Mina arrives in London; Van Helsing reads the letters</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:70.7%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">70.7%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>24</td>
+      <td class="col-desc">Van Helsing and Mina meet; Jonathan's journal handed over</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:72%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">72.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>25</td>
+      <td class="col-desc">The 'Bloofer Lady' press reports; Van Helsing proposes staking</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:73.4%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">73.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>26</td>
+      <td class="col-desc">Seward and Van Helsing visit Lucy's tomb (first visit)</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:74.6%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">74.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>27</td>
+      <td class="col-desc">Van Helsing returns alone; the Host is placed</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:75.5%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">75.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Sep</span>29</td>
+      <td class="col-desc">The child returned; the 'Bloofer Lady' identity confirmed</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:76.5%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">76.5%</span></td></tr><tr class="month-hdr"><td colspan="4">October</td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>1</td>
+      <td class="col-desc">Mina's journal; the gang assembles and plans</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:77.2%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">77.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>3</td>
+      <td class="col-desc">The staking of Un-Dead Lucy in her tomb</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:79.5%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">79.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>4</td>
+      <td class="col-desc">The whole group meets at Seward's; Mina types everything up</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:80.5%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">80.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>5</td>
+      <td class="col-desc">Jonathan's journal: Mina's extraordinary organizing work</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:81.7%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">81.7%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>6</td>
+      <td class="col-desc">Night raid on Carfax: the earth-boxes scattered</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:82.8%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">82.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>7</td>
+      <td class="col-desc">Mina hypnotized at sunrise; Renfield's strange urgent request</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:84%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">84.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>8</td>
+      <td class="col-desc">Mina is cut off from the group's plans — for her own good</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:85%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">85.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>9</td>
+      <td class="col-desc">Renfield attacked in his room — Dracula has entered the asylum</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:85.8%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">85.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>10</td>
+      <td class="col-desc">Seward: Renfield's dying revelation; Mina's horror discovered</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:86.5%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">86.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>11</td>
+      <td class="col-desc">Jonathan's journal: tracking the Czarina Catherine</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:87.3%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">87.3%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>12</td>
+      <td class="col-desc">Mina hypnotized: water lapping, chains rattling, moving east</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:87.9%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">87.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>13</td>
+      <td class="col-desc">Seward diary; Mina still senses the ship</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:88.4%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">88.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>14</td>
+      <td class="col-desc">The ship identified; the remaining earth-boxes traced</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:88.9%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">88.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>15</td>
+      <td class="col-desc">Tracing Dracula's money; the location of the last box</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:89.6%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">89.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>16</td>
+      <td class="col-desc">Mina's sunrise hypnosis: still aboard the ship</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:90.3%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">90.3%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>17</td>
+      <td class="col-desc">Van Helsing's memorandum; the group's strategy meeting</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:91.2%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">91.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>18</td>
+      <td class="col-desc">The group splits to travel toward Galatz; Mina comes too</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:92%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">92.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>19</td>
+      <td class="col-desc">Mina's journal: on the train, heading east</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:92.6%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">92.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>20</td>
+      <td class="col-desc">Jonathan's journal: further travel through Hungary</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:93.1%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">93.1%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>24</td>
+      <td class="col-desc">At Galatz; gathering local intelligence about the box</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:93.7%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">93.7%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>25</td>
+      <td class="col-desc">The river chase begins up the Sereth</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:94.3%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">94.3%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>26</td>
+      <td class="col-desc">The group divides; Seward and Arthur pursue by water</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:94.9%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">94.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>27</td>
+      <td class="col-desc">Jonathan's journal: the chase continues up-river</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:95.4%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">95.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>28</td>
+      <td class="col-desc">Closing in; Mina and Van Helsing head overland to the castle</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:95.9%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">95.9%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>29</td>
+      <td class="col-desc">Mina's journal: Van Helsing's account of the vampire women</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:96.5%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">96.5%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>30</td>
+      <td class="col-desc">Near the castle; Mina records the extraordinary journey</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:97.1%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">97.1%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Oct</span>31</td>
+      <td class="col-desc">At the castle; Van Helsing stakes the three women</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:97.6%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">97.6%</span></td></tr><tr class="month-hdr"><td colspan="4">November</td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Nov</span>1</td>
+      <td class="col-desc">Seward and Quincey intercept the Szgany and the box</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:98.2%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">98.2%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Nov</span>2</td>
+      <td class="col-desc">Jonathan's journal: the final chase, snow beginning to fall</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:98.7%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">98.7%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Nov</span>3</td>
+      <td class="col-desc">Mina: crossing the Carpathians</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:99%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">99.0%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Nov</span>4</td>
+      <td class="col-desc">The final confrontation — Dracula is destroyed; Quincey dies</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:99.4%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">99.4%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Nov</span>5</td>
+      <td class="col-desc">Mina: the immediate aftermath</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:99.6%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">99.6%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Nov</span>6</td>
+      <td class="col-desc">Note from Seward</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:99.8%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">99.8%</span></td></tr><tr class="future-row">
+      <td class="col-date"><span class="mo">Nov</span>7</td>
+      <td class="col-desc">Jonathan's note: seven years later — the happy epilogue</td>
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#D85A30"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:#FAECE7;color:#993C1D">100.0%</span></td></tr></tbody>
   </table>
 </div>
 
 <footer>
-  Dracula by Bram Stoker (1897) · Serialized by <a href="https://draculadaily.substack.com" target="_blank" style="color:var(--accent)">Dracula Daily</a> · May 3 – November 7
+  Dracula by Bram Stoker (1897) · Serialized by <a href="https://draculadaily.substack.com/" target="_blank">Dracula Daily</a> · May 3 – November 7
 </footer>
 
 <script>
@@ -434,15 +899,10 @@ function renderTable() {
     else if (future) tr.className = 'future-row';
 
     tr.innerHTML = `
-      <td class="col-month">${month}</td>
-      <td class="col-day">${day}${today ? '<span class="today-tag">today</span>' : ''}</td>
+      <td class="col-date"><span class="mo">${month}</span>${day}${today ? '<span class="today-tag">today</span>' : ''}</td>
       <td class="col-desc">${desc}</td>
-      <td class="col-pct">
-        <div class="pct-wrap">
-          <div class="bar-bg"><div class="bar-fill" style="width:${pct}%;background:${bar}"></div></div>
-          <span class="pct-label" style="background:${bg};color:${fg}">${pct.toFixed(1)}%</span>
-        </div>
-      </td>`;
+      <td class="col-bar"><div class="bar-bg"><div class="bar-fill" style="width:${pct}%;background:${bar}"></div></div></td>
+      <td class="col-pct"><span class="pct-label" style="background:${bg};color:${fg}">${pct.toFixed(1)}%</span></td>`;
     tbody.appendChild(tr);
   });
 
@@ -462,5 +922,6 @@ function scrollToToday() {
 updateBanner();
 renderTable();
 </script>
-</body>
-</html>
+
+
+</body></html>
